@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportune - Find Your Dream Job</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="signup.html">
+    <link rel="stylesheet" href="profile.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f3f2ef;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a66c2;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #ff5722;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #0a66c2;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn-outline {
+            border: 1px solid #0a66c2;
+            color: #0a66c2;
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: #e8f0fe;
+        }
+        
+        .btn-primary {
+            background-color: #0a66c2;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #004182;
+        }
+        
+        /* Hero Section */
+        .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('C:\Users\Chandini\OneDrive\Desktop\cappppp\job.jpg') no-repeat center center/cover;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-top: 70px;
+    border-radius: 0 0 10px 10px;
+}
+        
+        .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('job.jpg') no-repeat center center/cover;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-top: 70px;
+    border-radius: 0 0 10px 10px;
+}
+
+.hero-content {
+    max-width: 650px;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    background: white;
+    border-radius: 8px;
+    padding: 5px;
+    display: flex;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 8px 0 0 8px;
+}
+
+.search-box button {
+    background: #0a66c2;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.search-box button:hover {
+    background: #004182;
+}
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #0a66c2;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* How it Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: #f3f2ef;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #0a66c2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step:not(:last-child):after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            right: 0;
+            width: 70%;
+            height: 2px;
+            background: #0a66c2;
+        }
+        
+        /* Job Listings */
+        .job-listings {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .job-card-header {
+            padding: 20px;
+            background: #f7f7f7;
+        }
+        
+        .job-card-header h3 {
+            margin-bottom: 10px;
+        }
+        
+        .company {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .job-card-body {
+            padding: 20px;
+        }
+        
+        .job-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .job-detail {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .job-detail i {
+            margin-right: 5px;
+            color: #0a66c2;
+        }
+        
+        .job-card-footer {
+            padding: 15px 20px;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Voice Assistant */
+        .voice-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #0a66c2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .voice-assistant:hover {
+            transform: scale(1.1);
+        }
+        
+        .assistant-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .assistant-header {
+            background: #0a66c2;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close-assistant {
+            position: absolute;
+            right: 15px;
+            cursor: pointer;
+        }
+        
+        .assistant-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .assistant-footer {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+        }
+        
+        .assistant-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .assistant-footer button {
+            background: #0a66c2;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #0a66c2;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #0a66c2;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin: 20px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .step:not(:last-child):after {
+                display: none;
+            }
+            
+            .voice-assistant {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .assistant-window {
+                width: 280px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Opportu<span>ne</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Companies</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="signup.html" class="btn btn-outline">Sign Up</a>
+                    <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2Fgsi%2Fselect%3Fclient_id%3D990339570472-k6nqn1tpmitg8pui82bfaun3jrpmiuhs.apps.googleusercontent.com%26auto_select%3Dtrue%26ux_mode%3Dpopup%26ui_mode%3Dcard%26context%3Dsignin%26as%3DGCCw9Ww0JoajoDSBTyAfvw%26channel_id%3D9460d784f0760e7f6105aee6655d99f04bf01366dd18d0637127988b71f481c9%26origin%3Dhttps%3A%2F%2Fwww.linkedin.com&faa=1&ifkv=AfYwgwV9DdQ8z9z_U92LNL3b2NeKg1_35bNwkNdM5fM4P_XPt4bw7C5E9eRWBqlT79WcD37NJFLWCw&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S2064054167%3A1758358751464932" class="btn btn-primary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your Dream Job with Opportune</h1>
+                <p>Discover thousands of job opportunities from top companies around the world. Advance your career with our intelligent job matching platform.</p>
+                <div class="search-box">
+                    <input type="text" placeholder="Job title, keywords, or company">
+                    <input type="text" placeholder="Location">
+                    <button>Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Opportune?</h2>
+                <p>We provide the tools and resources to help you find the perfect job match</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Smart Job Search</h3>
+                    <p>Our AI-powered search finds jobs that match your skills, experience, and preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Instant Alerts</h3>
+                    <p>Get notified when new jobs that match your criteria are posted.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Profile Builder</h3>
+                    <p>Create a professional profile that stands out to employers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Follow these simple steps to find your next career opportunity</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create Profile</h3>
+                    <p>Sign up and build your professional profile with skills and experience.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Search Jobs</h3>
+                    <p>Use our advanced filters to find jobs that match your criteria.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Apply</h3>
+                    <p>Apply to jobs with just one click and track your applications.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Get Hired</h3>
+                    <p>Connect with employers and land your dream job.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Listings -->
+    <section class="job-listings">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Jobs</h2>
+                <p>Browse through our curated list of top job opportunities</p>
+            </div>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <h3>Frontend Developer</h3>
+                        <p class="company">Tech Solutions Inc.</p>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-details">
+                            <div class="job-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>San Francisco, CA</span>
+                            </div>
+                            <div class="job-detail">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>$90,000 - $120,000</span>
+                            </div>
+                        </div>
+                        <p>We are looking for an experienced Frontend Developer with React expertise to join our growing team.</p>
+                    </div>
+                    <div class="job-card-footer">
+                        <span>Full Time</span>
+                        <a href="#" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <h3>UX Designer</h3>
+                        <p class="company">Creative Minds LLC</p>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-details">
+                            <div class="job-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Remote</span>
+                            </div>
+                            <div class="job-detail">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>$85,000 - $110,000</span>
+                            </div>
+                        </div>
+                        <p>Join our design team to create beautiful and functional user experiences for our clients.</p>
+                    </div>
+                    <div class="job-card-footer">
+                        <span>Remote</span>
+                        <a href="#" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <h3>Data Scientist</h3>
+                        <p class="company">Data Analytics Corp</p>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-details">
+                            <div class="job-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>New York, NY</span>
+                            </div>
+                            <div class="job-detail">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>$110,000 - $140,000</span>
+                            </div>
+                        </div>
+                        <p>Seeking a Data Scientist with machine learning experience to analyze complex datasets.</p>
+                    </div>
+                    <div class="job-card-footer">
+                        <span>Full Time</span>
+                        <a href="#" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Assistant -->
+    <div class="voice-assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="assistant-window">
+        <div class="assistant-header">
+            <h3>Job Search Assistant</h3>
+            <div class="close-assistant">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="assistant-body">
+            <div class="assistant-message">
+                <p>Hello! I can help you find jobs. Try saying "search for developer jobs in New York"</p>
+            </div>
+        </div>
+        <div class="assistant-footer">
+            <input type="text" placeholder="Type your message or use voice command">
+            <button><i class="fas fa-microphone"></i></button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Opportune</h3>
+                    <p>Find your dream job with our advanced job search platform.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>For Job Seekers</h3>
+                    <ul>
+                        <li><a href="#">Browse Jobs</a></li>
+                        <li><a href="#">Career Advice</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                        <li><a href="#">Salary Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>For Employers</h3>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Candidates</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Recruitment Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Opportune. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Voice Assistant Functionality
+        const assistantIcon = document.querySelector('.voice-assistant');
+        const assistantWindow = document.querySelector('.assistant-window');
+        const closeAssistant = document.querySelector('.close-assistant');
+        const micButton = document.querySelector('.assistant-footer button');
+        
+        assistantIcon.addEventListener('click', () => {
+            assistantWindow.style.display = 'flex';
+        });
+        
+        closeAssistant.addEventListener('click', () => {
+            assistantWindow.style.display = 'none';
+        });
+        
+        let isListening = false;
+        
+        micButton.addEventListener('click', () => {
+            if (!isListening) {
+                micButton.innerHTML = '<i class="fas fa-stop"></i>';
+                isListening = true;
+                
+                // Simulate voice recognition
+                const assistantBody = document.querySelector('.assistant-body');
+                const userQuery = document.createElement('div');
+                userQuery.className = 'assistant-message';
+                userQuery.innerHTML = '<p>Searching for developer jobs in New York...</p>';
+                assistantBody.appendChild(userQuery);
+                
+                // Simulate response after a delay
+                setTimeout(() => {
+                    const response = document.createElement('div');
+                    response.className = 'assistant-message';
+                    response.innerHTML = '<p>I found 127 developer jobs in New York. <a href="#">View results</a></p>';
+                    assistantBody.appendChild(response);
+                    assistantBody.scrollTop = assistantBody.scrollHeight;
+                    
+                    // Reset mic button
+                    micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+                    isListening = false;
+                }, 2000);
+            } else {
+                micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+                isListening = false;
+            }
+        });
+        
+        // Simple job search functionality
+        const searchButton = document.querySelector('.search-box button');
+        searchButton.addEventListener('click', () => {
+            const jobInput = document.querySelector('.search-box input[type="text"]');
+            const locationInput = document.querySelectorAll('.search-box input[type="text"]')[1];
+            
+            if (jobInput.value || locationInput.value) {
+                alert(`Searching for: ${jobInput.value} in ${locationInput.value}`);
+            } else {
+                alert('Please enter a job title or location to search');
+            }
+        });
+    </script>
+</body>
+</html>
