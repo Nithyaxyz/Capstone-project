@@ -809,25 +809,75 @@
         </div>
     </footer>
 
-    <script>
-        
-        
-        const searchButton = document.querySelector('.search-box button');
-searchButton.addEventListener('click', () => {
-    const jobSelect = document.getElementById('job-select');
-    const locationInput = document.getElementById('location-input');
-    
-    const job = jobSelect.value;
-    const location = locationInput.value;
-    
-    if (job || location) {
-        alert(`Searching for: ${job || 'All jobs'} in ${location || 'any location'}`);
-    } else {
-        alert('Please select a job title or enter a location to search');
-    }
-});
+   <script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
+  const supabaseUrl = "https://qjslqrcxbxoiqvaustje.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqc2xxcmN4YnhvaXF2YXVzdGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MTA5MTgsImV4cCI6MjA3Mjk4NjkxOH0.zFa6cjt3cXGtkrrUXEiCvqXZM2lz6yjxMt6sgK4US9c";  // from Supabase project settings
+  window.supabase = createClient(supabaseUrl, supabaseKey);
+     </script>
+
+    <script>
+        // Voice Assistant Functionality
+        const assistantIcon = document.querySelector('.voice-assistant');
+        const assistantWindow = document.querySelector('.assistant-window');
+        const closeAssistant = document.querySelector('.close-assistant');
+        const micButton = document.querySelector('.assistant-footer button');
+        
+        assistantIcon.addEventListener('click', () => {
+            assistantWindow.style.display = 'flex';
+        });
+        
+        closeAssistant.addEventListener('click', () => {
+            assistantWindow.style.display = 'none';
+        });
+        
+        let isListening = false;
+        
+        micButton.addEventListener('click', () => {
+            if (!isListening) {
+                micButton.innerHTML = '<i class="fas fa-stop"></i>';
+                isListening = true;
+                
+                // Simulate voice recognition
+                const assistantBody = document.querySelector('.assistant-body');
+                const userQuery = document.createElement('div');
+                userQuery.className = 'assistant-message';
+                userQuery.innerHTML = '<p>Searching for developer jobs in New York...</p>';
+                assistantBody.appendChild(userQuery);
+                
+                // Simulate response after a delay
+                setTimeout(() => {
+                    const response = document.createElement('div');
+                    response.className = 'assistant-message';
+                    response.innerHTML = '<p>I found 127 developer jobs in New York. <a href="#">View results</a></p>';
+                    assistantBody.appendChild(response);
+                    assistantBody.scrollTop = assistantBody.scrollHeight;
+                    
+                    // Reset mic button
+                    micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+                    isListening = false;
+                }, 2000);
+            } else {
+                micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+                isListening = false;
+            }
+        });
+        
+        // Simple job search functionality
+        const searchButton = document.querySelector('.search-box button');
+        searchButton.addEventListener('click', () => {
+            const jobInput = document.querySelector('.search-box input[type="text"]');
+            const locationInput = document.querySelectorAll('.search-box input[type="text"]')[1];
+            
+            if (jobInput.value || locationInput.value) {
+                alert(`Searching for: ${jobInput.value} in ${locationInput.value}`);
+            } else {
+                alert('Please enter a job title or location to search');
+            }
+        });
     </script>
 </body>
 </html>
+
 
