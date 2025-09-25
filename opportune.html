@@ -805,7 +805,13 @@
             </div>
         </div>
     </footer>
+ <script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
+  const supabaseUrl = "https://qjslqrcxbxoiqvaustje.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqc2xxcmN4YnhvaXF2YXVzdGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MTA5MTgsImV4cCI6MjA3Mjk4NjkxOH0.zFa6cjt3cXGtkrrUXEiCvqXZM2lz6yjxMt6sgK4US9c";  // from Supabase project settings
+  window.supabase = createClient(supabaseUrl, supabaseKey);
+     </script>
     <script>
         
         
@@ -936,4 +942,5 @@ searchButton.addEventListener('click', () => {
 
     </script>
 </body>
+
 </html>
