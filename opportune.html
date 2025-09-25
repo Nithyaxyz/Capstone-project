@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opportune - Find Your Dream Job</title>
+    <title>JobOpportune - Find Your Dream Job</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="signup.html">
     <link rel="stylesheet" href="profile.html">
+    <link rel="stylesheet" href="about.html">
     <style>
         * {
             margin: 0;
@@ -110,18 +111,9 @@
         }
         
         /* Hero Section */
-        .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('C:\Users\Chandini\OneDrive\Desktop\cappppp\job.jpg') no-repeat center center/cover;
-    height: 600px;
-    display: flex;
-    align-items: center;
-    color: white;
-    margin-top: 70px;
-    border-radius: 0 0 10px 10px;
-}
         
         .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('job.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80') no-repeat center center/cover;
     height: 600px;
     display: flex;
     align-items: center;
@@ -532,36 +524,70 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">Opportu<span>ne</span></a>
+                <a href="#" class="logo">Job<span>Opportune</span></a>
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="#" class="active">Home</a></li>
                         <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Companies</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="profile.html">Profile</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
                     <a href="signup.html" class="btn btn-outline">Sign Up</a>
-                    <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2Fgsi%2Fselect%3Fclient_id%3D990339570472-k6nqn1tpmitg8pui82bfaun3jrpmiuhs.apps.googleusercontent.com%26auto_select%3Dtrue%26ux_mode%3Dpopup%26ui_mode%3Dcard%26context%3Dsignin%26as%3DGCCw9Ww0JoajoDSBTyAfvw%26channel_id%3D9460d784f0760e7f6105aee6655d99f04bf01366dd18d0637127988b71f481c9%26origin%3Dhttps%3A%2F%2Fwww.linkedin.com&faa=1&ifkv=AfYwgwV9DdQ8z9z_U92LNL3b2NeKg1_35bNwkNdM5fM4P_XPt4bw7C5E9eRWBqlT79WcD37NJFLWCw&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S2064054167%3A1758358751464932" class="btn btn-primary">Sign In</a>
+                    <a href="signin.html" class="btn btn-primary">Sign In</a>
                 </div>
             </div>
         </div>
-    </header>
+    </header>   
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Find Your Dream Job with Opportune</h1>
-                <p>Discover thousands of job opportunities from top companies around the world. Advance your career with our intelligent job matching platform.</p>
+                <h1>Find Your Dream Job with JobOpportune</h1>
+                <p>Discover thousands of job opportunities from top companies around India. Advance your career with our intelligent job matching platform specially for Software Engineers.</p>
                 <div class="search-box">
-                    <input type="text" placeholder="Job title, keywords, or company">
-                    <input type="text" placeholder="Location">
-                    <button>Search</button>
-                </div>
+    <!-- Job Title Dropdown -->
+    <select id="job-select">
+        <option value="">Select Job Title</option>
+        <option value="Frontend Developer">Frontend Developer</option>
+        <option value="Backend Developer">Backend Developer</option>
+        <option value="Full Stack Developer">Full Stack Developer</option>
+        <option value="Mobile App Developer">Mobile App Developer</option>
+        <option value="Data Scientist">Data Scientist</option>
+        <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+        <option value="DevOps Engineer">DevOps Engineer</option>
+        <option value="QA Engineer">QA Engineer</option>
+        <option value="UX/UI Designer">UX/UI Designer</option>
+        <option value="Software Architect">Software Architect</option>
+        <option value="Cloud Engineer">Cloud Engineer</option>
+        <option value="Security Engineer">Security Engineer</option>
+        <option value="Embedded Systems Engineer">Embedded Systems Engineer</option>
+        <option value="Game Developer">Game Developer</option>
+        <option value="Blockchain Developer">Blockchain Developer</option>
+    </select>
+
+    <!-- Location Dropdown -->
+    <select id="location-select">
+        <option value="">Select Location</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Pune">Pune</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Noida">Noida</option>
+        <option value="Gurgaon">Gurgaon</option>
+        <option value="Remote">Remote</option>
+    </select>
+
+    <!-- Search Button -->
+    <button>Search</button>
+</div>
+
             </div>
         </div>
     </section>
@@ -570,7 +596,7 @@
     <section class="features">
         <div class="container">
             <div class="section-title">
-                <h2>Why Choose Opportune?</h2>
+                <h2>Why Choose JobOpportune</h2>
                 <p>We provide the tools and resources to help you find the perfect job match</p>
             </div>
             <div class="features-grid">
@@ -648,11 +674,11 @@
                         <div class="job-details">
                             <div class="job-detail">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>San Francisco, CA</span>
+                                <span>Bangalore, Karnataka</span>
                             </div>
                             <div class="job-detail">
                                 <i class="fas fa-dollar-sign"></i>
-                                <span>$90,000 - $120,000</span>
+                                <span>90,000 - 120,000</span>
                             </div>
                         </div>
                         <p>We are looking for an experienced Frontend Developer with React expertise to join our growing team.</p>
@@ -694,11 +720,11 @@
                         <div class="job-details">
                             <div class="job-detail">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>New York, NY</span>
+                                <span>Pune, Maharashtra</span>
                             </div>
                             <div class="job-detail">
                                 <i class="fas fa-dollar-sign"></i>
-                                <span>$110,000 - $140,000</span>
+                                <span>110,000 - 140,000</span>
                             </div>
                         </div>
                         <p>Seeking a Data Scientist with machine learning experience to analyze complex datasets.</p>
@@ -712,35 +738,35 @@
         </div>
     </section>
 
-    <!-- Voice Assistant -->
-    <div class="voice-assistant">
-        <i class="fas fa-robot"></i>
-    </div>
+    <!-- Voice Assistant Button -->
+<a href="index.html">
+    <div class="voice-assistant" id="voiceAssistantBtn">🤖</div>
+</a>
 
-    <div class="assistant-window">
-        <div class="assistant-header">
-            <h3>Job Search Assistant</h3>
-            <div class="close-assistant">
-                <i class="fas fa-times"></i>
-            </div>
-        </div>
-        <div class="assistant-body">
-            <div class="assistant-message">
-                <p>Hello! I can help you find jobs. Try saying "search for developer jobs in New York"</p>
-            </div>
-        </div>
-        <div class="assistant-footer">
-            <input type="text" placeholder="Type your message or use voice command">
-            <button><i class="fas fa-microphone"></i></button>
-        </div>
+
+<!-- Assistant Window -->
+<div class="assistant-window" id="assistantWindow">
+    <div class="assistant-header">
+        Speech Robot
+        <span class="close-assistant" id="closeAssistant">&times;</span>
     </div>
+    <div class="assistant-body">
+        <div id="transcriptText">Click start and ask me anything!</div>
+    </div>
+    <div class="assistant-footer">
+        <button id="startBtn">🎤</button>
+        <button id="stopBtn" disabled>⏹️</button>
+        <button id="clearBtn">🗑️</button>
+    </div>
+</div>
+
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Opportune</h3>
+                    <h3>JobOpportune</h3>
                     <p>Find your dream job with our advanced job search platform.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -784,64 +810,23 @@
     </footer>
 
     <script>
-        // Voice Assistant Functionality
-        const assistantIcon = document.querySelector('.voice-assistant');
-        const assistantWindow = document.querySelector('.assistant-window');
-        const closeAssistant = document.querySelector('.close-assistant');
-        const micButton = document.querySelector('.assistant-footer button');
         
-        assistantIcon.addEventListener('click', () => {
-            assistantWindow.style.display = 'flex';
-        });
         
-        closeAssistant.addEventListener('click', () => {
-            assistantWindow.style.display = 'none';
-        });
-        
-        let isListening = false;
-        
-        micButton.addEventListener('click', () => {
-            if (!isListening) {
-                micButton.innerHTML = '<i class="fas fa-stop"></i>';
-                isListening = true;
-                
-                // Simulate voice recognition
-                const assistantBody = document.querySelector('.assistant-body');
-                const userQuery = document.createElement('div');
-                userQuery.className = 'assistant-message';
-                userQuery.innerHTML = '<p>Searching for developer jobs in New York...</p>';
-                assistantBody.appendChild(userQuery);
-                
-                // Simulate response after a delay
-                setTimeout(() => {
-                    const response = document.createElement('div');
-                    response.className = 'assistant-message';
-                    response.innerHTML = '<p>I found 127 developer jobs in New York. <a href="#">View results</a></p>';
-                    assistantBody.appendChild(response);
-                    assistantBody.scrollTop = assistantBody.scrollHeight;
-                    
-                    // Reset mic button
-                    micButton.innerHTML = '<i class="fas fa-microphone"></i>';
-                    isListening = false;
-                }, 2000);
-            } else {
-                micButton.innerHTML = '<i class="fas fa-microphone"></i>';
-                isListening = false;
-            }
-        });
-        
-        // Simple job search functionality
         const searchButton = document.querySelector('.search-box button');
-        searchButton.addEventListener('click', () => {
-            const jobInput = document.querySelector('.search-box input[type="text"]');
-            const locationInput = document.querySelectorAll('.search-box input[type="text"]')[1];
-            
-            if (jobInput.value || locationInput.value) {
-                alert(`Searching for: ${jobInput.value} in ${locationInput.value}`);
-            } else {
-                alert('Please enter a job title or location to search');
-            }
-        });
+searchButton.addEventListener('click', () => {
+    const jobSelect = document.getElementById('job-select');
+    const locationInput = document.getElementById('location-input');
+    
+    const job = jobSelect.value;
+    const location = locationInput.value;
+    
+    if (job || location) {
+        alert(`Searching for: ${job || 'All jobs'} in ${location || 'any location'}`);
+    } else {
+        alert('Please select a job title or enter a location to search');
+    }
+});
+
     </script>
 </body>
 </html>
