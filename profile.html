@@ -412,7 +412,7 @@
                 <nav>
                     <ul>
                         <li><a href="opportune.html">Home</a></li>
-                        <li><a href="#" class="active">Jobs</a></li>
+                        <li><a href="#">Jobs</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="#" class="active">Profile</a></li>
@@ -479,9 +479,40 @@
                         <div class="detail-value" id="user-phone">Add your phone number</div>
                     </div>
                     <div class="profile-detail">
-                        <div class="detail-label">Location:</div>
-                        <div class="detail-value" id="user-location-detail">Add your location</div>
-                    </div>
+    <div class="detail-label">Location:</div>
+    <select id="user-location">
+        <option value="">-- Select your state --</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+    </select>
+</div>
+
                 </div>
                 
                 <div class="edit-mode">
@@ -494,9 +525,40 @@
                         <input type="text" id="phone-edit" placeholder="Your phone number">
                     </div>
                     <div class="profile-detail">
-                        <div class="detail-label">Location:</div>
-                        <input type="text" id="location-edit" placeholder="Your location">
-                    </div>
+    <div class="detail-label">Location:</div>
+    <select id="location-edit">
+        <option value="">-- Select your state --</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+    </select>
+</div>
+
                     <div class="form-actions">
                         <button class="save-btn" data-section="contact">Save</button>
                         <button class="cancel-btn" data-section="contact">Cancel</button>
@@ -686,14 +748,15 @@
                     }
                 }
                 
-                // Setup logout functionality
-                document.getElementById('logout-btn').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (confirm('Are you sure you want to log out?')) {
-                        localStorage.removeItem('userData');
-                        window.location.href = 'opportune.html';
-                    }
-                });
+                // Update the existing logout function to also reload the page
+document.getElementById('logout-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (confirm('Are you sure you want to log out?')) {
+        localStorage.removeItem('userData');
+        localStorage.removeItem('profileData');
+        window.location.href = 'opportune.html';
+    }
+});
             } else {
                 // Redirect to signup if no user data found
                 window.location.href = 'signup.html';
