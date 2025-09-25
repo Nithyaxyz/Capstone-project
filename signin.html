@@ -71,9 +71,38 @@
     .social-icons a { color: white; font-size: 1.2rem; }
     .social-icons a:hover { color: #0a66c2; }
     .copyright { text-align: center; padding-top: 20px; border-top: 1px solid #444; color: #ddd; font-size: 0.9rem; }
+    
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .forgot-password {
+      font-size: 14px;
+      color: #0a66c2;
+      text-decoration: none;
+    }
+    
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+    
     @media (max-width: 576px) {
       .signin-header { padding: 20px; }
       .signin-body { padding: 20px; }
+      .remember-forgot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -82,7 +111,10 @@
   <header>
     <div class="container">
       <div class="header-content">
-        <a href="#" class="logo">Job<span>Opportune</span></a>
+        <a href="opportune.html" class="logo">Job<span>Opportune</span></a>
+        <div class="auth-buttons" id="auth-buttons">
+          <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
       </div>
     </div>
   </header>
@@ -105,6 +137,15 @@
               <label for="signin-password">Password</label>
               <input type="password" id="signin-password" class="form-control" placeholder="Enter your password" required>
             </div>
+            
+            <div class="remember-forgot">
+              <div class="remember-me">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember me</label>
+              </div>
+              <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            
             <button type="submit" class="btn btn-primary">Sign In</button>
           </form>
 
@@ -166,31 +207,93 @@
   </footer>
 
   <script>
-    document.getElementById('signin-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const email = document.getElementById('signin-email').value;
-      const password = document.getElementById('signin-password').value;
-
-      // Retrieve signup data
-      const storedUser = JSON.parse(localStorage.getItem('userData'));
-      if (!storedUser) {
-        alert('No account found. Please sign up first.');
-        return;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Auto-fill last used email if available and remember me is checked
+      const lastEmail = localStorage.getItem('lastLoginEmail');
+      const rememberMe = localStorage.getItem('rememberMe') === 'true';
+      
+      if (lastEmail && rememberMe) {
+        document.getElementById('signin-email').value = lastEmail;
+        document.getElementById('remember-me').checked = true;
       }
+      
+      document.getElementById('signin-form').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-      // Basic validation: check email & password match
-      if (email === storedUser.email && password.length >= 8) {
-        alert('Login successful! Redirecting to your profile...');
-        setTimeout(() => { window.location.href = "profile.html"; }, 1200);
-      } else {
-        alert('Invalid email or password. Please try again.');
-      }
-    });
+        const email = document.getElementById('signin-email').value.trim();
+        const password = document.getElementById('signin-password').value;
+        const rememberMe = document.getElementById('remember-me').checked;
 
-    document.querySelector('.btn-google').addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('Redirecting to Google authentication...');
+        // Store last login email
+        localStorage.setItem('lastLoginEmail', email);
+        
+        // Store remember me preference
+        if (rememberMe) {
+          localStorage.setItem('rememberMe', 'true');
+        } else {
+          localStorage.removeItem('rememberMe');
+        }
+
+        // Method 1: Check individual user storage
+        const storedUser = JSON.parse(localStorage.getItem('user_' + email));
+        
+        // Method 2: Check users array
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        const userFromArray = users.find(u => u.email === email);
+        
+        // Use whichever user data we find
+        const userData = storedUser || userFromArray;
+
+        if (!userData) {
+          alert('No account found with this email. Please sign up first.');
+          return;
+        }
+
+        // Check password
+        if (password === userData.password) {
+          // Set as current user
+          localStorage.setItem('userData', JSON.stringify(userData));
+          
+          alert(`Welcome back, ${userData.firstName}! Redirecting to your profile...`);
+          setTimeout(() => { 
+            window.location.href = "profile.html"; 
+          }, 1200);
+        } else {
+          alert('Invalid password. Please try again.');
+        }
+      });
+
+      // Google sign-in
+      document.querySelector('.btn-google').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Check if we have any stored users for demo
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        if (users.length > 0) {
+          // Auto-login with first stored user for demo
+          const demoUser = users[0];
+          localStorage.setItem('userData', JSON.stringify(demoUser));
+          localStorage.setItem('lastLoginEmail', demoUser.email);
+          
+          alert(`Signed in as ${demoUser.firstName} ${demoUser.lastName}! Redirecting...`);
+          setTimeout(() => { 
+            window.location.href = "profile.html"; 
+          }, 1200);
+        } else {
+          alert('No existing accounts found. Please sign up first.');
+        }
+      });
+
+      // Forgot password
+      document.querySelector('.forgot-password').addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('signin-email').value.trim();
+        if (email) {
+          alert(`Password reset instructions would be sent to ${email}`);
+        } else {
+          alert('Please enter your email address first.');
+        }
+      });
     });
   </script>
 </body>
