@@ -93,6 +93,7 @@
         
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
         
         .form-group label {
@@ -114,6 +115,17 @@
         .form-control:focus {
             border-color: #0a66c2;
             outline: none;
+        }
+        
+        .form-control.error {
+            border-color: #e74c3c;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
         }
         
         .name-fields {
@@ -142,16 +154,21 @@
             width: 100%;
             text-align: center;
             font-size: 16px;
+            border: none;
         }
         
         .btn-primary {
             background-color: #0a66c2;
             color: white;
-            border: none;
         }
         
         .btn-primary:hover {
             background-color: #004182;
+        }
+        
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
         
         .divider {
@@ -285,6 +302,17 @@
             font-size: 0.9rem;
         }
         
+        /* Success Message */
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        
         /* Responsive Design */
         @media (max-width: 576px) {
             .name-fields {
@@ -307,7 +335,10 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">Job<span>Opportune</span></a>
+                <a href="opportune.html" class="logo">Job<span>Opportune</span></a>
+                <div class="auth-buttons" id="auth-buttons">
+                    <a href="signin.html" class="btn btn-primary">Sign In</a>
+                </div>
             </div>
         </div>
     </header>
@@ -321,20 +352,27 @@
                     <p>Join JobOpportune to find your dream job</p>
                 </div>
                 <div class="signup-body">
+                    <div class="success-message" id="success-message">
+                        Account created successfully! Redirecting to profile...
+                    </div>
+                    
                     <form id="signup-form">
                         <div class="name-fields">
                             <div class="form-group">
                                 <label for="firstname">First Name</label>
                                 <input type="text" id="firstname" class="form-control" placeholder="Enter your first name" required>
+                                <div class="error-message" id="firstname-error">First name is required</div>
                             </div>
                             <div class="form-group">
                                 <label for="lastname">Last Name</label>
                                 <input type="text" id="lastname" class="form-control" placeholder="Enter your last name" required>
+                                <div class="error-message" id="lastname-error">Last name is required</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                            <div class="error-message" id="email-error">Please enter a valid email address</div>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -342,20 +380,52 @@
                             <div class="password-requirements">
                                 Must be at least 8 characters with a number and special character
                             </div>
+                            <div class="error-message" id="password-error">Password must be at least 8 characters with a number and special character</div>
                         </div>
                         <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" class="form-control" placeholder="e.g. Bangalore, India">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Agree & Join</button>
+    <label for="location">Location</label>
+    <select id="location" class="form-control">
+        <option value="">-- Select your state --</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+    </select>
+</div>
+
+                        <button type="submit" class="btn btn-primary" id="submit-btn">Agree & Join</button>
                     </form>
                     
                     <div class="divider">
                         <span>or</span>
                     </div>
                     
-                    <a href="#" class="btn btn-google">
-                        <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2Fgsi%2Fselect%3Fclient_id%3D990339570472-k6nqn1tpmitg8pui82bfaun3jrpmiuhs.apps.googleusercontent.com%26auto_select%3Dtrue%26ux_mode%3Dpopup%26ui_mode%3Dcard%26context%3Dsignin%26as%3DGCCw9Ww0JoajoDSBTyAfvw%26channel_id%3D9460d784f0760e7f6105aee6655d99f04bf01366dd18d0637127988b71f481c9%26origin%3Dhttps%3A%2F%2Fwww.linkedin.com&faa=1&ifkv=AfYwgwV9DdQ8z9z_U92LNL3b2NeKg1_35bNwkNdM5fM4P_XPt4bw7C5E9eRWBqlT79WcD37NJFLWCw&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S2064054167%3A1758358751464932" class="btn btn-primary"><i class="fab fa-google"></i> Continue with Google</a>
+                    <a href="#" class="btn btn-google" id="google-signin">
+                        <i class="fab fa-google"></i> Continue with Google
                     </a>
                     
                     <p class="terms">
@@ -366,7 +436,7 @@
                     </p>
                     
                     <div class="login-link">
-                        Already on Opportune? <a href="#">Sign in</a>
+                        Already on Opportune? <a href="signin.html" id="login-link">Sign in</a>
                     </div>
                 </div>
             </div>
@@ -418,61 +488,191 @@
         </div>
     </footer>
 
-    <script type="module">
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
-const supabaseUrl = "https://qjslqrcxbxoiqvaustje.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqc2xxcmN4YnhvaXF2YXVzdGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MTA5MTgsImV4cCI6MjA3Mjk4NjkxOH0.zFa6cjt3cXGtkrrUXEiCvqXZM2lz6yjxMt6sgK4US9c"; 
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-// SIGNUP HANDLER
-document.getElementById("signup-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const firstName = document.getElementById("firstname").value;
-  const lastName = document.getElementById("lastname").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const location = document.getElementById("location").value;
-
-  // ✅ Step 1: Sign up with Supabase Auth
-  const { data: authData, error: authError } = await supabase.auth.signUp({ email, password });
-  if (authError) {
-    alert(authError.message);
-    return;
-  }
-
-  // ✅ Step 2: Insert profile into your "users" table
-  const { error: insertError } = await supabase.from("users").insert([
-    {
-      id: authData.user.id,   // UUID from Supabase Auth
-      firstname: firstName,
-      lastname: lastName,
-      email: email,
-      location: location,
-      created_at: new Date()
-    }
-  ]);
-
-  if (insertError) {
-    console.error("Insert error:", insertError);
-    alert("Failed to save user details. Check console for error.");
-    return;
-  }
-
-  // Save userId for later use (profile, skills, etc.)
-  localStorage.setItem("userId", authData.user.id);
-
-  alert("Account created successfully! Redirecting...");
-  setTimeout(() => { window.location.href = "profile.html"; }, 1500);
-});
-
-
- 
-
-  
-   
-</script>
+    <script>
+        // Form validation and submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupForm = document.getElementById('signup-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const successMessage = document.getElementById('success-message');
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate first name
+                const firstName = document.getElementById('firstname').value.trim();
+                if (firstName === '') {
+                    showError('firstname', 'First name is required');
+                    isValid = false;
+                } else {
+                    hideError('firstname');
+                }
+                
+                // Validate last name
+                const lastName = document.getElementById('lastname').value.trim();
+                if (lastName === '') {
+                    showError('lastname', 'Last name is required');
+                    isValid = false;
+                } else {
+                    hideError('lastname');
+                }
+                
+                // Validate email
+                const email = document.getElementById('email').value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email === '') {
+                    showError('email', 'Email is required');
+                    isValid = false;
+                } else if (!emailRegex.test(email)) {
+                    showError('email', 'Please enter a valid email address');
+                    isValid = false;
+                } else {
+                    hideError('email');
+                }
+                
+                // Validate password
+                const password = document.getElementById('password').value;
+                const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+                if (password === '') {
+                    showError('password', 'Password is required');
+                    isValid = false;
+                } else if (!passwordRegex.test(password)) {
+                    showError('password', 'Password must be at least 8 characters with a number and special character');
+                    isValid = false;
+                } else {
+                    hideError('password');
+                }
+                
+                return isValid;
+            }
+            
+            function showError(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                const errorElement = document.getElementById(fieldId + '-error');
+                
+                field.classList.add('error');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            
+            function hideError(fieldId) {
+                const field = document.getElementById(fieldId);
+                const errorElement = document.getElementById(fieldId + '-error');
+                
+                field.classList.remove('error');
+                errorElement.style.display = 'none';
+            }
+            
+            // Form submission
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    // Disable submit button to prevent multiple submissions
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Creating Account...';
+                    
+                    // Get form values
+                    const firstName = document.getElementById('firstname').value.trim();
+                    const lastName = document.getElementById('lastname').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const password = document.getElementById('password').value;
+                    const location = document.getElementById('location').value.trim();
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        // Save user data to localStorage
+                        const userData = {
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            password: password,
+                            location: location,
+                            joinedDate: new Date().toISOString()
+                        };
+                        
+                        // Save to localStorage with email as key for easy lookup
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                        localStorage.setItem('user_' + email, JSON.stringify(userData));
+                        
+                        // Also store in a users array to track multiple accounts
+                        let users = JSON.parse(localStorage.getItem('users')) || [];
+                        // Check if user already exists
+                        const existingUserIndex = users.findIndex(u => u.email === email);
+                        if (existingUserIndex === -1) {
+                            users.push(userData);
+                        } else {
+                            users[existingUserIndex] = userData; // Update existing user
+                        }
+                        localStorage.setItem('users', JSON.stringify(users));
+                        
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        
+                        // Redirect to profile page after 2 seconds
+                        setTimeout(() => {
+                            window.location.href = 'profile.html';
+                        }, 2000);
+                    }, 1500);
+                }
+            });
+            
+            // Google sign-in button
+            document.getElementById('google-signin').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Check if we have any stored users for demo
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                if (users.length > 0) {
+                    // Auto-login with first stored user for demo
+                    const demoUser = users[0];
+                    localStorage.setItem('userData', JSON.stringify(demoUser));
+                    localStorage.setItem('lastLoginEmail', demoUser.email);
+                    
+                    alert(`Signed in as ${demoUser.firstName} ${demoUser.lastName}! Redirecting...`);
+                    setTimeout(() => { 
+                        window.location.href = "profile.html"; 
+                    }, 1200);
+                } else {
+                    // Simulate Google sign-in for new user
+                    const userData = {
+                        firstName: 'Google',
+                        lastName: 'User',
+                        email: 'googleuser@example.com',
+                        password: 'google123!',
+                        location: 'San Francisco, CA',
+                        joinedDate: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    localStorage.setItem('user_' + userData.email, JSON.stringify(userData));
+                    
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    users.push(userData);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    
+                    successMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'profile.html';
+                    }, 2000);
+                }
+            });
+            
+            // Real-time validation
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateForm();
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('error')) {
+                        hideError(this.id);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>
