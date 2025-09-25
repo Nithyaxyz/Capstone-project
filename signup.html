@@ -418,43 +418,61 @@
         </div>
     </footer>
 
-    <script>
-        // Form validation
-        document.getElementById('signup-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const password = document.getElementById('password').value;
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-            
-            // In the signup form submission handler, replace the alert with:
-if (!passwordRegex.test(password)) {
-    alert('Password must be at least 8 characters long and contain at least one number and one special character.');
+    <script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const supabaseUrl = "https://qjslqrcxbxoiqvaustje.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqc2xxcmN4YnhvaXF2YXVzdGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MTA5MTgsImV4cCI6MjA3Mjk4NjkxOH0.zFa6cjt3cXGtkrrUXEiCvqXZM2lz6yjxMt6sgK4US9c"; 
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// SIGNUP HANDLER
+document.getElementById("signup-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const firstName = document.getElementById("firstname").value;
+  const lastName = document.getElementById("lastname").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const location = document.getElementById("location").value;
+
+  // ✅ Step 1: Sign up with Supabase Auth
+  const { data: authData, error: authError } = await supabase.auth.signUp({ email, password });
+  if (authError) {
+    alert(authError.message);
     return;
-}
+  }
 
-// Save user data to localStorage
-const userData = {
-    firstName: document.getElementById('firstname').value,
-    lastName: document.getElementById('lastname').value,
-    email: document.getElementById('email').value,
-    location: document.getElementById('location').value
-};
+  // ✅ Step 2: Insert profile into your "users" table
+  const { error: insertError } = await supabase.from("users").insert([
+    {
+      id: authData.user.id,   // UUID from Supabase Auth
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      location: location,
+      created_at: new Date()
+    }
+  ]);
 
-localStorage.setItem('userData', JSON.stringify(userData));
+  if (insertError) {
+    console.error("Insert error:", insertError);
+    alert("Failed to save user details. Check console for error.");
+    return;
+  }
 
-// Redirect to profile page
-alert('Account created successfully! Redirecting to your profile...');
-setTimeout(function() {
-    window.location.href = "profile.html";
-}, 1500);
-        });
-        
-        // Google sign-in button
-        document.querySelector('.btn-google').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Redirecting to Google authentication...');
-            // In a real application, this would redirect to Google OAuth
-        });
-    </script>
+  // Save userId for later use (profile, skills, etc.)
+  localStorage.setItem("userId", authData.user.id);
+
+  alert("Account created successfully! Redirecting...");
+  setTimeout(() => { window.location.href = "profile.html"; }, 1500);
+});
+
+
+ 
+
+  
+   
+</script>
 </body>
+
 </html>
