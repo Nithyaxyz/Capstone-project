@@ -1,13 +1,12 @@
-<!-- PROFILE PAGE - Save as profile.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opportune - User Profile</title>
+    <title>JobOpportune - User Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Basic styles from the home page */
+        /* Your existing CSS remains the same */
         * {
             margin: 0;
             padding: 0;
@@ -238,6 +237,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            padding: 5px;
         }
         
         .edit-section-btn:hover {
@@ -408,17 +408,18 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">Opportu<span>ne</span></a>
+                <a href="opportune.html" class="logo">Job<span>Opportune</span></a>
                 <nav>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Companies</a></li>
+                        <li><a href="opportune.html">Home</a></li>
+                        <li><a href="#" class="active">Jobs</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="#" class="active">Profile</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">Log Out</a>
+                    <a href="#" class="btn btn-outline" id="logout-btn">Log Out</a>
                 </div>
             </div>
         </div>
@@ -431,7 +432,6 @@
                 <div class="profile-avatar" id="user-avatar"></div>
                 <div class="profile-info">
                     <h1 id="user-name"></h1>
-                    <p id="user-title" class="empty-state">Add your professional title</p>
                     <p id="user-location" class="empty-state">Add your location</p>
                 </div>
             </div>
@@ -476,11 +476,11 @@
                     </div>
                     <div class="profile-detail">
                         <div class="detail-label">Phone:</div>
-                        <div class="detail-value" id="user-phone" class="empty-state">Add your phone number</div>
+                        <div class="detail-value" id="user-phone">Add your phone number</div>
                     </div>
                     <div class="profile-detail">
                         <div class="detail-label">Location:</div>
-                        <div class="detail-value" id="user-location-detail" class="empty-state">Add your location</div>
+                        <div class="detail-value" id="user-location-detail">Add your location</div>
                     </div>
                 </div>
                 
@@ -566,7 +566,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Opportune</h3>
+                    <h3>JobOpportune</h3>
                     <p>Find your dream job with our advanced job search platform.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -669,8 +669,31 @@
                                 </div>
                             `;
                         });
+                        
+                        // Also populate edit mode
+                        const experienceEditList = document.getElementById('experience-edit-list');
+                        experienceEditList.innerHTML = '';
+                        profileData.experience.forEach(exp => {
+                            experienceEditList.innerHTML += `
+                                <div class="experience-item">
+                                    <input type="text" value="${exp.title}" placeholder="Job Title">
+                                    <input type="text" value="${exp.company}" placeholder="Company">
+                                    <input type="text" value="${exp.duration}" placeholder="Duration">
+                                    <textarea placeholder="Description">${exp.description}</textarea>
+                                </div>
+                            `;
+                        });
                     }
                 }
+                
+                // Setup logout functionality
+                document.getElementById('logout-btn').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to log out?')) {
+                        localStorage.removeItem('userData');
+                        window.location.href = 'opportune.html';
+                    }
+                });
             } else {
                 // Redirect to signup if no user data found
                 window.location.href = 'signup.html';
@@ -707,10 +730,10 @@
             });
             
             // Remove skill buttons
-            document.querySelectorAll('.remove-skill').forEach(button => {
-                button.addEventListener('click', function() {
-                    this.parentElement.remove();
-                });
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-skill')) {
+                    e.target.parentElement.remove();
+                }
             });
             
             // Add skill button
@@ -722,13 +745,6 @@
                     const skillsList = document.getElementById('skills-edit-list');
                     skillsList.innerHTML += `<div class="skill-tag">${skill} <span class="remove-skill">×</span></div>`;
                     skillInput.value = '';
-                    
-                    // Reattach event listeners to new remove buttons
-                    document.querySelectorAll('.remove-skill').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            this.parentElement.remove();
-                        });
-                    });
                 }
             });
 
@@ -753,19 +769,35 @@
                 case 'about':
                     profileData.about = document.getElementById('about-edit').value;
                     document.getElementById('user-bio').textContent = profileData.about;
-                    document.getElementById('user-bio').classList.remove('empty-state');
+                    if (profileData.about) {
+                        document.getElementById('user-bio').classList.remove('empty-state');
+                    } else {
+                        document.getElementById('user-bio').classList.add('empty-state');
+                        document.getElementById('user-bio').textContent = 'Tell others about yourself, your experience, and your career goals.';
+                    }
                     break;
                     
                 case 'contact':
                     profileData.phone = document.getElementById('phone-edit').value;
                     profileData.location = document.getElementById('location-edit').value;
                     
-                    document.getElementById('user-phone').textContent = profileData.phone;
-                    document.getElementById('user-phone').classList.remove('empty-state');
-                    document.getElementById('user-location-detail').textContent = profileData.location;
-                    document.getElementById('user-location-detail').classList.remove('empty-state');
-                    document.getElementById('user-location').textContent = profileData.location;
-                    document.getElementById('user-location').classList.remove('empty-state');
+                    document.getElementById('user-phone').textContent = profileData.phone || 'Add your phone number';
+                    document.getElementById('user-location-detail').textContent = profileData.location || 'Add your location';
+                    document.getElementById('user-location').textContent = profileData.location || 'Add your location';
+                    
+                    if (profileData.phone) {
+                        document.getElementById('user-phone').classList.remove('empty-state');
+                    } else {
+                        document.getElementById('user-phone').classList.add('empty-state');
+                    }
+                    
+                    if (profileData.location) {
+                        document.getElementById('user-location-detail').classList.remove('empty-state');
+                        document.getElementById('user-location').classList.remove('empty-state');
+                    } else {
+                        document.getElementById('user-location-detail').classList.add('empty-state');
+                        document.getElementById('user-location').classList.add('empty-state');
+                    }
                     break;
                     
                 case 'skills':
